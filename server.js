@@ -6,9 +6,8 @@ const connectDB = require("./config/db");
 //connect Database
 connectDB();
 
-app.get("/", (req, res) => {
-  res.send("Server is running");
-});
+//init middleware
+app.use(express.json({ extended: false }));
 
 //Define ROutes
 app.use("/api/users", require("./routes/api/users"));
@@ -16,6 +15,12 @@ app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/profile", require("./routes/api/profile"));
 app.use("/api/post", require("./routes/api/post"));
 
+//testing API connection
+app.get("/", (req, res) => {
+  res.send("Server is running");
+});
+
+//Api listing to port
 app.listen(PORT, () => {
   console.log("app is running on port ", PORT);
 });
